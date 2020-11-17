@@ -1,0 +1,165 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Variable */
+$success: #5cb85c;
+$danger: #d9534f;
+$cyan: #00bcd4;
+$primary: #2196f3;
+$light-gray: #bdbdbd;
+$secondary: #333333;
+
+/* Typography */
+.font-20 {
+  font-size: 20px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-15 {
+  font-size: 15px;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.font-weight-normal {
+  font-weight: normal;
+}
+
+.font-weight-light {
+  font-weight: light;
+}
+
+/* Spacing */
+
+$distances: 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50;
+@each $distance in $distances {
+  .m-#{$distance} {
+    margin: #{$distance}px !important;
+  }
+  .m-t-#{$distance} {
+    margin-top: #{$distance}px !important;
+  }
+  .m-b-#{$distance} {
+    margin-bottom: #{$distance}px !important;
+  }
+  .m-l-#{$distance} {
+    margin-left: #{$distance}px !important;
+  }
+  .m-r-#{$distance} {
+    margin-right: #{$distance}px !important;
+  }
+  .p-#{$distance} {
+    padding: #{$distance}px !important;
+  }
+  .p-t-#{$distance} {
+    padding-top: #{$distance}px !important;
+  }
+  .p-b-#{$distance} {
+    padding-bottom: #{$distance}px !important;
+  }
+  .p-l-#{$distance} {
+    padding-left: #{$distance}px !important;
+  }
+  .p-r-#{$distance} {
+    padding-right: #{$distance}px !important;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-75 {
+  width: 75%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-25 {
+  width: 25%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+// Color
+
+.bg-cyan {
+    background-color: $cyan;
+}
+
+.bg-danger {
+    background-color: $danger;
+}
+
+.bg-secondary {
+    background: $secondary;
+}
+
+.bg-light-gray {
+  background: $light-gray;
+}
+
+.bg-success {
+    background: $success;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+
+.b-cyan {
+    border: 1px solid $cyan;
+}
+.b-danger {
+    border: 1px solid $danger;
+}
+
+.b-secondary {
+    border: 1px solid $secondary;
+}
+
+.b-success {
+    border: 1px solid $success;
+}
+
+
+
+
+// Common
+button {
+    outline: none!important;
+}
+
+input {
+    height: 35px;
+}
+
+select {
+    height: 39px;  
+}
+
+.b-3 {
+    border-radius: 3px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

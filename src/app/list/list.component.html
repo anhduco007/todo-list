@@ -1,0 +1,60 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="column" fxFLex="95" fxFlex.gt-md="50">
+    <span class="font-20 font-weight-bold w-100 text-center m-t-20 m-b-30" >Todo list</span>
+    <div class="ml-auto">
+      <button type="button" 
+      class="font-12 text-secondary p-l-20 p-r-20 p-t-5 p-b-5 m-b-20 cursor-pointer b-3 b-secondary" 
+      style="background: none;" 
+      routerLink="/create">New task</button>
+    </div>
+    <input placeholder="Search by title ..." class="m-b-20" (keyup)="input$.next($event.target.value)">
+    <!-- Todo list -->
+    <div *ngFor="let item of data; index as index" class="m-b-15">
+      <ng-container [ngTemplateOutlet]="tmpl" [ngTemplateOutletContext]="{ $implicit: item, index: index }"></ng-container>
+    </div>
+    <div fxLayout="row" class="p-20 m-t-40 bg-light-gray" *ngIf="itemsOnAction.length">
+      <span class="font-15 text-secondary m-l-10" fxLayoutAlign="start center">Bulk action</span>
+      <div class="ml-auto" fxLayoutAlign="center center">
+        <button class="font-12 text-white bg-cyan b-cyan p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3" >Done</button>
+        <button class="font-12 text-white bg-danger b-danger p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3 m-l-10" (click)="multiRemove()">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #tmpl let-item let-index="index">
+  <div>
+    <div fxLayout="row" class="w-100 b-secondary p-t-20 p-b-20 p-l-15 p-r-15" >
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <input type="checkbox" (change)="onCheck($event, index)" style="width: 25px; height: 25px;">
+        <span class="font-15 text-secondary m-l-10">{{item.name}}</span>
+      </div>
+      <div class="ml-auto" fxLayoutAlign="center center">
+        <button class="font-12 text-white bg-cyan b-cyan p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3" (click)="item.isOpenDetail = !item.isOpenDetail">Detail</button>
+        <button class="font-12 text-white bg-danger b-danger p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3 m-l-10" (click)="remove(index, item.id)">Remove</button>
+      </div>
+
+    </div>
+    <div class="b-secondary p-20" fxLayout="column" style="border-top: none;" *ngIf="item.isOpenDetail">
+      <input type="text" [value]="item.name" #name>
+      <span class="font-12 font-weight-bold m-t-15">Descreption</span>
+      <textarea name="" id="" cols="30" rows="10" style="resize: none;" [value]="item.descreption" #descreption></textarea>
+      <div class="" fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-md="50" fxLayout="column" class="p-r-10">
+          <span class="font-12 font-weight-bold m-t-15">Due date</span>
+          <input type="date" [value]="item.dueDate" #dueDate>
+        </div>
+        <div fxFlex="100" fxFlex.gt-md="50" fxLayout="column" class="p-l-10">
+          <span class="font-12 font-weight-bold m-t-15">Piority</span>
+          <select name="cars" id="cars" [value]="item.piority" #piority>
+            <option value="normal">Normal</option>
+            <option value="hight">Hight</option>
+          </select>
+        </div>
+      </div>
+      <button type="button" 
+         class="w-100 p-t-10 p-b-10 bg-success text-white b-success b-3 m-t-20 cursor-pointer" 
+         (click)="update({name: name.value, descreption: descreption.value, dueDate: dueDate.value, piority: piority.value, isOpenDetail: item.isOpenDetail}, index)">Update</button>
+    </div>
+  </div>
+</ng-template>

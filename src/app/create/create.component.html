@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="column" fxFLex="95" fxFlex.gt-md="50" [formGroup]="form">
+    <span class="font-20 font-weight-bold w-100 text-center m-t-20 m-b-30" >New task</span>
+    <div class="b-secondary p-20" fxLayout="column">
+      <input type="text" placeholder="Name..." formControlName="name">
+      <span *ngIf="">Required</span>
+      <span class="font-12 font-weight-bold m-t-15">Descreption</span>
+      <textarea name="" id="" cols="30" rows="10" style="resize: none;" formControlName="descreption"></textarea>
+      <div class="" fxLayout="row wrap">
+        <div fxFlex="100" fxFlex.gt-md="50" fxLayout="column" class="p-r-10">
+          <span class="font-12 font-weight-bold m-t-15">Due date</span>
+          <input type="date" formControlName="dueDate">
+        </div>
+        <div fxFlex="100" fxFlex.gt-md="50" fxLayout="column" class="p-l-10">
+          <span class="font-12 font-weight-bold m-t-15">Piority</span>
+          <select name="cars" id="cars" formControlName="piority">
+            <option value="low">Low</option>
+            <option value="normal">Normal</option>
+            <option value="hight">Hight</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit"  (click)="submit()"
+         class="w-100 p-t-10 p-b-10 bg-success text-white b-success b-3 m-t-20 cursor-pointer" 
+      >Add</button>
+    </div>
+  </div>
+</div>
