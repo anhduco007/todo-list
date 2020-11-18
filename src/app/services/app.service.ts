@@ -2,34 +2,21 @@ import { Injectable } from '@angular/core';
 import { IData } from './app.model';
 @Injectable()
 export class AppService {
-  // data: IData[] = [
-  //   {
-  //     name: 'Housework-2020-11-12',
-  //     descreption: 'abcd',
-  //     dueDate: '2020-11-12',
-  //     piority: 'normal',
-  //     isOpenDetail: false,
-  //     id: this.genId()
-  //   },
-  //   {
-  //     name: 'Study-2020-11-15',
-  //     descreption: 'ab33cd',
-  //     dueDate: '2020-11-15',
-  //     piority: 'hight',
-  //     isOpenDetail: false,
-  //     id: this.genId()
-  //   }
-  // ];
 
   constructor() {
-    // this.setDataToLocal(this.data);
   }
 
   getListData(): IData[] {
-    // if () {}
     const data = localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [];
     this.sortDataByDate(data);
     return data;
+  }
+
+  createData(body: IData) {
+    const data: IData[] = this.getListData();
+    data.push(body);
+    this.clearLocal();
+    this.setDataToLocal(data);
   }
 
   setDataToLocal(data: any) {

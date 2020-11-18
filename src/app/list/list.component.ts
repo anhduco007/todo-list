@@ -27,11 +27,7 @@ export class ListComponent implements OnInit {
     this.input$
       .pipe()
       .subscribe(res => {
-        if (res) {
-          this.data = this.getListData().filter((x: IData) => x.name.toLocaleLowerCase().indexOf(res.toLocaleLowerCase()) !== -1);
-        } else {
-          this.data = this.getListData();
-        }
+        this.data = res ? this.getListData().filter((x: IData) => x.name.toLocaleLowerCase().indexOf(res.toLocaleLowerCase()) !== -1) : this.getListData();
       });
   }
 
@@ -43,10 +39,12 @@ export class ListComponent implements OnInit {
     this.data[index] = data;
   }
 
-  remove(index: number, id: number) {
-    this.data.splice(index, 1);
-    this.itemsOnAction = this.itemsOnAction.filter(x => x !== id);
+  remove(index: number, id: number, search: string) {
+    this.data = this.appService.getListData();
+    this.data = this.data.filter(x => x.id !== id);
     this.appService.setDataToLocal(this.data);
+    this.data = this.data.filter(x => x.name.toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1);
+    this.itemsOnAction = this.itemsOnAction.filter(x => x !== id);
   }
 
   multiRemove() {

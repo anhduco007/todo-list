@@ -29,16 +29,14 @@ export class CreateComponent implements OnInit {
       descreption: [null],
       dueDate: [this.datePipe.transform(new Date(), 'yyyy-MM-dd')],
       piority: ['normal'],
-      isOpenDetail: [false]
+      isOpenDetail: [false],
+      id: [this.appService.genId()]
     });
   }
 
   submit() {
     if (this.form.invalid) { return; }
-    const data: IData[] = this.appService.getListData();
-    data.push(this.form.value);
-    this.appService.clearLocal();
-    this.appService.setDataToLocal(data);
+    this.appService.createData(this.form.value);
     this.router.navigateByUrl('');
   }
 

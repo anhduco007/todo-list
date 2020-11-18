@@ -7,7 +7,7 @@
       style="background: none;" 
       routerLink="/create">New task</button>
     </div>
-    <input placeholder="Search by title ..." class="m-b-20" (keyup)="input$.next($event.target.value)">
+    <input placeholder="Search by title ..." #search class="m-b-20" (keyup)="input$.next($event.target.value)">
     <!-- Todo list -->
     <div *ngFor="let item of data; index as index" class="m-b-15">
       <ng-container [ngTemplateOutlet]="tmpl" [ngTemplateOutletContext]="{ $implicit: item, index: index }"></ng-container>
@@ -27,15 +27,16 @@
     <div fxLayout="row" class="w-100 b-secondary p-t-20 p-b-20 p-l-15 p-r-15" >
       <div fxLayout="row" fxLayoutAlign="center center">
         <input type="checkbox" (change)="onCheck($event, index)" style="width: 25px; height: 25px;">
+        <input [hidden]="true" #check [value]="0">
         <span class="font-15 text-secondary m-l-10">{{item.name}}</span>
       </div>
-      <div class="ml-auto" fxLayoutAlign="center center">
-        <button class="font-12 text-white bg-cyan b-cyan p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3" (click)="item.isOpenDetail = !item.isOpenDetail">Detail</button>
-        <button class="font-12 text-white bg-danger b-danger p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3 m-l-10" (click)="remove(index, item.id)">Remove</button>
+      <div class="ml-auto" fxLayoutAlign="center center" >
+        <button class="font-12 text-white bg-cyan b-cyan p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3" (click)="check.value = check.value == 1 ? 0 : 1">Detail</button>
+        <button class="font-12 text-white bg-danger b-danger p-l-20 p-r-20 p-t-10 p-b-10 cursor-pointer b-3 m-l-10" (click)="remove(index, item.id, search.value)">Remove</button>
       </div>
 
     </div>
-    <div class="b-secondary p-20" fxLayout="column" style="border-top: none;" *ngIf="item.isOpenDetail">
+    <div class="b-secondary p-20" fxLayout="column" style="border-top: none;" *ngIf="check.value == 1">
       <input type="text" [value]="item.name" #name>
       <span class="font-12 font-weight-bold m-t-15">Descreption</span>
       <textarea name="" id="" cols="30" rows="10" style="resize: none;" [value]="item.descreption" #descreption></textarea>
